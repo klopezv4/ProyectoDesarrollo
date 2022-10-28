@@ -1,4 +1,4 @@
-<?php include('connection.php');
+<?php include('medicos/connection.php');
 $id = $_POST['id'];
 $sql = "SELECT * FROM medicos WHERE id='$id' LIMIT 1";
 $query = mysqli_query($con,$sql);

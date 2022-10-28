@@ -179,13 +179,44 @@
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Medicos</span>
                 </a>
+            </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="medicos">
+                <a class="nav-link" href="medicos/medicos.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Medicos</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="medicos/medicos.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Consultas</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="medicos/medicos.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Visitas</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="medicos/medicos.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Laboratorio</span></a>
+            </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Farmacia</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="medicos/medicos.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Medicamentos</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
