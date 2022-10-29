@@ -446,7 +446,7 @@
         },
         "aoColumnDefs": [{
             "bSortable": false,
-            "aTargets": [4]
+            "aTargets": [8]
           },
 
         ]
@@ -454,17 +454,25 @@
     });
     $(document).on('submit', '#addUser', function(e) {
       e.preventDefault();
-      var nombre = $('#addUserField').val();
-      var telefono = $('#addMobileField').val();
-      var especialidad = $('#addEspecalidadField').val();
-      if (nombre != '' && telefono != '' && especialidad != '') {
+      var FechaDeVisita = $('#addFechaDeVisita').val();
+      var MotivoDeVisita = $('#addMotivoDeVisita').val();
+      var MedicoTratante = $('#addMedicoTratante').val();
+      var ExamenesDeLab = $('#addExamenesDeLab').val();
+      var Diagnostico = $('#addDiagnostico').val();
+      var MedicamentoAp = $('#addMedicamentoAp').val();
+      var Observaciones = $('#addObservaciones').val();
+      if (FechaDeVisita != '' && MotivoDeVisita != '' && MedicoTratante != ''&& ExamenesDeLab != '' && Diagnostico!= ''&& MedicamentoAp != '' && Observaciones != '') {
         $.ajax({
           url: "add_user.php",
           type: "post",
           data: {
-            nombre: nombre,
-            telefono: telefono,
-            especialidad: especialidad
+            FechaDeVisita: FechaDeVisita,
+            MotivoDeVisita: MotivoDeVisita,
+            MedicoTratante: MedicoTratante,
+            ExamenesDeLab: ExamenesDeLab,
+            Diagnostico: Diagnostico,
+            MedicamentoAp: MedicamentoAp,
+            Observaciones: Observaciones
           },
           success: function(data) {
             var json = JSON.parse(data);
@@ -485,19 +493,27 @@
     $(document).on('submit', '#updateUser', function(e) {
       e.preventDefault();
       //var tr = $(this).closest('tr');
-      var nombre = $('#nameField').val();
-      var telefono = $('#mobileField').val();
-      var especialidad = $('#especialidadField').val();
+      var FechaDeVisita = $('#FechaDeVisitaField').val();
+      var MotivoDeVisita = $('#MotivoDeVisitaField').val();
+      var MedicoTratante = $('#MedicoTratanteField').val();
+      var ExamenesDeLab = $('#ExamenesDeLabField').val();
+      var Diagnostico = $('#DiagnosticoField').val();
+      var MedicamentoAp = $('#MedicamentoApField').val();
+      var Observaciones = $('#ObservacionesField').val();
       var trid = $('#trid').val();
       var id = $('#id').val();
-      if (nombre != '' && telefono!= '' && especialidad != '') {
+      if (FechaDeVisita != '' && MotivoDeVisita != '' && MedicoTratante != ''&& ExamenesDeLab != '' && Diagnostico!= ''&& MedicamentoAp != '' && Observaciones != '') {
         $.ajax({
           url: "update_user.php",
           type: "post",
           data: {
-            nombre: nombre,
-            telefono: telefono,
-            especialidad: especialidad,
+            FechaDeVisita: FechaDeVisita,
+            MotivoDeVisita: MotivoDeVisita,
+            MedicoTratante: MedicoTratante,
+            ExamenesDeLab: ExamenesDeLab,
+            Diagnostico: Diagnostico,
+            MedicamentoAp: MedicamentoAp,
+            Observaciones: Observaciones,
             id: id
           },
           success: function(data) {
@@ -512,7 +528,7 @@
               // table.cell(parseInt(trid) - 1,4).data(city);
               var button = '<td><a href="javascript:void();" data-id="' + id + '" class="btn btn-info btn-sm editbtn">Editar</a>  <a href="#!"  data-id="' + id + '"  class="btn btn-danger btn-sm deleteBtn">Borrar</a></td>';
               var row = table.row("[id='" + trid + "']");
-              row.row("[id='" + trid + "']").data([id, nombre, telefono, especialidad, button]);
+              row.row("[id='" + trid + "']").data([id, FechaDeVisita, MotivoDeVisita, MedicoTratante, ExamenesDeLab, Diagnostico, MedicamentoAp, Observaciones, button]);
               $('#exampleModal').modal('hide');
             } else {
               alert('failed');
@@ -538,9 +554,13 @@
         type: 'post',
         success: function(data) {
           var json = JSON.parse(data);
-          $('#nameField').val(json.nombre);
-          $('#especialidadField').val(json.especialidad);
-          $('#mobileField').val(json.telefono);
+          $('#FechaDeVisitaField').val(json.FechaDeVisita);
+          $('#MotivoDeVisitaField').val(json.MotivoDeVisita);
+          $('#MedicoTratanteField').val(json.MedicoTratante);
+          $('#ExamenesDeLabField').val(json.ExamenesDeLab);
+          $('#MedicamentoApField').val(json.MedicamentoAp);
+          $('#MedicamentoApField').val(json.MedicamentoAp);
+          $('#ObservacionesField').val(json.Observaciones);
           $('#id').val(id);
           $('#trid').val(trid);
         }
