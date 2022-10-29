@@ -192,7 +192,7 @@
                     <span>Consultas</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="medicos/medicos.php">
+                <a class="nav-link" href="visitas/visitas.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Visitas</span></a>
             </li>
