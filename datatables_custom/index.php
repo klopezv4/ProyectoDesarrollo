@@ -1,5 +1,5 @@
 <?php
-	include('connection.php');
+	
 	session_start();
 	
 	if(!isset($_SESSION['id'])){
@@ -9,36 +9,46 @@
 	$nombre = $_SESSION['nombre'];
 	$tipo_usuario = $_SESSION['tipo_usuario'];
 	
+	
 ?>
+
+<?php
+include '../conexion.php';
+$consulta="select * from visitas";
+$ejecutar=mysqli_query($mysqli,$consulta) or die(mysqli_error($mysqli));
+
+?>
+
 <!doctype html>
-<html lang="es">
+<html lang="en">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- Bootstrap CSS -->
-  <link href="medicos/css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
-  <link rel="stylesheet" type="medicos/text/css" href="medicos/css/datatables-1.10.25.min.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="#" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cabeza de Algodon</title>
 
-  <title>Cabeza de Algodon</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="main.css">
 
-  <style type="medicos/text/css">
-    .btnAdd {
-      text-align: right;
-      width: 83%;
-      margin-bottom: 20px;
-    }
-  </style>
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css" />
+    <!--datables estilo bootstrap 4 CSS-->
+    <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
+
+    <!--font awesome con CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="../text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="../text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 </head>
@@ -64,7 +74,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="../principal.php">
+                <a class="nav-link" href="principal.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -351,7 +361,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $nombre;?></span>
                                 <img class="img-profile rounded-circle"
-                                    src="./img/undraw_profile.svg">
+                                    src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -365,7 +375,7 @@
                                     Configuración
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="./logout.php" >
+                                <a class="dropdown-item" href="logout.php" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Salir
                                 </a>
@@ -375,348 +385,88 @@
                     </ul>
 
                 </nav>
+                <!-- End of Topbar -->
 
-<!-- Begin Page Content -->
-<div class="container-fluid">
-<!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary"></h6>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              
-  <div class="container-fluid">
-    <h2 class="text-center">Medicos</h2>
-    <p class="datatable design text-center">Control de Medicos</p>
-    <div class="row">
-      <div class="container">
-        <div class="btnAdd">
-          <a href="#!" data-id="" data-bs-toggle="modal" data-bs-target="#addUserModal" class="btn btn-success btn-sm">Nuevo</a>
-        </div>
-        <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-8">
-            <table id="example" class="table">
-              <thead>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Telefono</th>
-                <th>Especialidad</th>
-                <th>Options</th>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-md-2"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Optional JavaScript; choose one of the two! -->
-  <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-  <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="js/dt-1.10.25datatables.min.js"></script>
-  <!-- Option 2: Separate Popper and Bootstrap JS -->
-  <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-  -->
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('#example').DataTable({
-        "fnCreatedRow": function(nRow, aData, iDataIndex) {
-          $(nRow).attr('id', aData[0]);
-        },
-        'serverSide': 'true',
-        'processing': 'true',
-        'paging': 'true',
-        'order': [],
-        'ajax': {
-          'url': 'fetch_data.php',
-          'type': 'post',
-        },
-        "aoColumnDefs": [{
-            "bSortable": false,
-            "aTargets": [4]
-          },
+                    <div class="container-fluid">
 
-        ]
-      });
-    });
-    $(document).on('submit', '#addUser', function(e) {
-      e.preventDefault();
-      var nombre = $('#addUserField').val();
-      var telefono = $('#addMobileField').val();
-      var especialidad = $('#addEspecalidadField').val();
-      if (nombre != '' && telefono != '' && especialidad != '') {
-        $.ajax({
-          url: "add_user.php",
-          type: "post",
-          data: {
-            nombre: nombre,
-            telefono: telefono,
-            especialidad: especialidad
-          },
-          success: function(data) {
-            var json = JSON.parse(data);
-            var status = json.status;
-            if (status == 'true') {
-              mytable = $('#example').DataTable();
-              mytable.draw();
-              $('#addUserModal').modal('hide');
-            } else {
-              alert('failed');
-            }
-          }
-        });
-      } else {
-        alert('Fill all the required fields');
-      }
-    });
-    $(document).on('submit', '#updateUser', function(e) {
-      e.preventDefault();
-      //var tr = $(this).closest('tr');
-      var nombre = $('#nameField').val();
-      var telefono = $('#mobileField').val();
-      var especialidad = $('#especialidadField').val();
-      var trid = $('#trid').val();
-      var id = $('#id').val();
-      if (nombre != '' && telefono!= '' && especialidad != '') {
-        $.ajax({
-          url: "update_user.php",
-          type: "post",
-          data: {
-            nombre: nombre,
-            telefono: telefono,
-            especialidad: especialidad,
-            id: id
-          },
-          success: function(data) {
-            var json = JSON.parse(data);
-            var status = json.status;
-            if (status == 'true') {
-              table = $('#example').DataTable();
-              // table.cell(parseInt(trid) - 1,0).data(id);
-              // table.cell(parseInt(trid) - 1,1).data(username);
-              // table.cell(parseInt(trid) - 1,2).data(email);
-              // table.cell(parseInt(trid) - 1,3).data(mobile);
-              // table.cell(parseInt(trid) - 1,4).data(city);
-              var button = '<td><a href="javascript:void();" data-id="' + id + '" class="btn btn-info btn-sm editbtn">Editar</a>  <a href="#!"  data-id="' + id + '"  class="btn btn-danger btn-sm deleteBtn">Borrar</a></td>';
-              var row = table.row("[id='" + trid + "']");
-              row.row("[id='" + trid + "']").data([id, nombre, telefono, especialidad, button]);
-              $('#exampleModal').modal('hide');
-            } else {
-              alert('failed');
-            }
-          }
-        });
-      } else {
-        alert('Fill all the required fields');
-      }
-    });
-    $('#example').on('click', '.editbtn ', function(event) {
-      var table = $('#example').DataTable();
-      var trid = $(this).closest('tr').attr('id');
-      // console.log(selectedRow);
-      var id = $(this).data('id');
-      $('#exampleModal').modal('show');
+                        <!-- Page Heading -->
+                        <h1 class="h3 mb-2 text-gray-800">Reporte Diario</h1>
+                        <p class="mb-4">En esta parte veremos un ejemplo de reporte
+                            <!--<a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
 
-      $.ajax({
-        url: "get_single_data.php",
-        data: {
-          id: id
-        },
-        type: 'post',
-        success: function(data) {
-          var json = JSON.parse(data);
-          $('#nameField').val(json.nombre);
-          $('#especialidadField').val(json.especialidad);
-          $('#mobileField').val(json.telefono);
-          $('#id').val(id);
-          $('#trid').val(trid);
-        }
-      })
-    });
+                            <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Table Ejemplo</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="table-responsive">
+                                                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>id</th>
+                                                                    <th>Fecha De Visita</th>
+                                                                    <th>Motivo De Visita</th>
+                                                                    <th>Medico Tratante</th>
+                                                                    <th>Examenes DE Laboratorio</th>
+                                                                    <th>Diagnostico</th>
+                                                                    <th>Medicamento Aplicado</th>
+                                                                    <th>Observaciones</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                
+                                                            <?php foreach($ejecutar as $row): ?>
 
-    $(document).on('click', '.deleteBtn', function(event) {
-      var table = $('#example').DataTable();
-      event.preventDefault();
-      var id = $(this).data('id');
-      if (confirm("Confirma que desea eliminar este dato? ")) {
-        $.ajax({
-          url: "delete_user.php",
-          data: {
-            id: id
-          },
-          type: "post",
-          success: function(data) {
-            var json = JSON.parse(data);
-            status = json.status;
-            if (status == 'success') {
-              //table.fnDeleteRow( table.$('#' + id)[0] );
-              //$("#example tbody").find(id).remove();
-              //table.row($(this).closest("tr")) .remove();
-              $("#" + id).closest('tr').remove();
-            } else {
-              alert('Failed');
-              return;
-            }
-          }
-        });
-      } else {
-        return null;
-      }
-
-
-
-    })
-  </script>
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="updateUser">
-            <input type="hidden" name="id" id="id" value="">
-            <input type="hidden" name="trid" id="trid" value="">
-            <div class="mb-3 row">
-              <label for="nameField" class="col-md-3 form-label">Nombre</label>
-              <div class="col-md-9">
-                <input type="text" class="form-control" id="nameField" name="name">
-              </div>
-            </div>
-            <div class="mb-3 row">
-              <label for="especialidadField" class="col-md-3 form-label">Especialidad</label>
-              <div class="col-md-9">
-                <input type="text" class="form-control" id="especialidadField" name="email">
-              </div>
-            </div>
-            <div class="mb-3 row">
-              <label for="mobileField" class="col-md-3 form-label">Telefono</label>
-              <div class="col-md-9">
-                <input type="text" class="form-control" id="mobileField" name="mobile">
-              </div>
-            </div>
-            <div class="text-center">
-              <button type="submit" class="btn btn-primary">Hecho</button>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Add user Modal -->
-  <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Añadir</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="addUser" action="">
-            <div class="mb-3 row">
-              <label for="addUserField" class="col-md-3 form-label">Nombre</label>
-              <div class="col-md-9">
-                <input type="text" class="form-control" id="addUserField" name="name">
-              </div>
-            </div>
-            <div class="mb-3 row">
-              <label for="addEspecalidadField" class="col-md-3 form-label">Especialidad</label>
-              <div class="col-md-9">
-                <input type="text" class="form-control" id="addEspecalidadField" name="email">
-              </div>
-            </div>
-            <div class="mb-3 row">
-              <label for="addMobileField" class="col-md-3 form-label">Telefono</label>
-              <div class="col-md-9">
-                <input type="text" class="form-control" id="addMobileField" name="mobile">
-              </div>
-            </div>
-            <div class="text-center">
-              <button type="submit" class="btn btn-primary">Hecho</button>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; UMG 2022</span>
+                                                                <tr>
+                                                                <td><?php echo $row['id']; ?></td>
+                                                                <td><?php echo $row['FechaDeVisita']; ?></td>
+                                                                <td><?php echo $row['MotivoDeVisita']; ?></td>
+                                                                <td><?php echo $row['MedicoTratante']; ?></td>
+                                                                <td><?php echo $row['ExamenesDeLab']; ?></td>
+                                                                <td><?php echo $row['Diagnostico']; ?></td>
+                                                                <td><?php echo $row['MedicamentoAp']; ?></td>
+                                                                <td><?php echo $row['Observaciones']; ?></td>
+                                                                </tr>
+                                                            <?php endforeach ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
+                </ul>
 
-        </div>
-        <!-- End of Content Wrapper -->
+            </nav>
+            <!-- jQuery, Popper.js, Bootstrap JS -->
+            <script src="jquery/jquery-3.3.1.min.js"></script>
+            <script src="popper/popper.min.js"></script>
+            <script src="bootstrap/js/bootstrap.min.js"></script>
 
-    </div>
-    <!-- End of Page Wrapper -->
+            <!-- datatables JS -->
+            <script type="text/javascript" src="datatables/datatables.min.js"></script>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+            <!-- para usar botones en datatables JS -->
+            <script src="datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+            <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>
+            <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>
+            <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+            <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+            <!-- código JS propìo-->
+            <script type="text/javascript" src="main.js"></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 
 </html>
-<script type="text/javascript">
-  //var table = $('#example').DataTable();
-</script>
