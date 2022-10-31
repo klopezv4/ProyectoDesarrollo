@@ -19,8 +19,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- Bootstrap CSS -->
-  <link href="medicos/css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
-  <link rel="stylesheet" type="medicos/text/css" href="medicos/css/datatables-1.10.25.min.css" />
+  <link href="visitas/css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
+  <link rel="stylesheet" type="visitas/text/css" href="visitas/css/datatables-1.10.25.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -402,10 +402,10 @@
               <thead>
                 <th>Id</th>
                 <th>Fecha de visita</th>
+                <th>Nombre De Paciente</th>
                 <th>Motivo de Visita</th>
                 <th>Medico tratante</th>
                 <th>Examenes Realizados</th>
-                <th>Resultados</th>
                 <th>Diagnostico</th>
                 <th>Medicamento Aplicado</th>
                 <th>Observaciones medicas</th>
@@ -441,7 +441,7 @@
         'paging': 'true',
         'order': [],
         'ajax': {
-          'url': 'visitas/fetch_data.php',
+          'url': 'fetch_data.php',
           'type': 'post',
         },
         "aoColumnDefs": [{
@@ -455,18 +455,20 @@
     $(document).on('submit', '#addUser', function(e) {
       e.preventDefault();
       var FechaDeVisita = $('#addFechaDeVisita').val();
+      var $NombredePaciente = $('#addNombredePaciente').val();
       var MotivoDeVisita = $('#addMotivoDeVisita').val();
       var MedicoTratante = $('#addMedicoTratante').val();
       var ExamenesDeLab = $('#addExamenesDeLab').val();
       var Diagnostico = $('#addDiagnostico').val();
       var MedicamentoAp = $('#addMedicamentoAp').val();
       var Observaciones = $('#addObservaciones').val();
-      if (FechaDeVisita != '' && MotivoDeVisita != '' && MedicoTratante != ''&& ExamenesDeLab != '' && Diagnostico!= ''&& MedicamentoAp != '' && Observaciones != '') {
+      if (FechaDeVisita != '' &&NombredePaciente  != '' && MotivoDeVisita != '' && MedicoTratante != ''&& ExamenesDeLab != '' && Diagnostico!= ''&& MedicamentoAp != '' && Observaciones != '') {
         $.ajax({
           url: "add_user.php",
           type: "post",
           data: {
             FechaDeVisita: FechaDeVisita,
+            NombredePaciente: NombredePaciente,
             MotivoDeVisita: MotivoDeVisita,
             MedicoTratante: MedicoTratante,
             ExamenesDeLab: ExamenesDeLab,
@@ -487,13 +489,14 @@
           }
         });
       } else {
-        alert('Fill all the required fields');
+        alert('Llenar campos requeridos');
       }
     });
     $(document).on('submit', '#updateUser', function(e) {
       e.preventDefault();
       //var tr = $(this).closest('tr');
       var FechaDeVisita = $('#FechaDeVisitaField').val();
+      var NombredePaciente = $('#NombredePacienteField').val()
       var MotivoDeVisita = $('#MotivoDeVisitaField').val();
       var MedicoTratante = $('#MedicoTratanteField').val();
       var ExamenesDeLab = $('#ExamenesDeLabField').val();
@@ -502,12 +505,13 @@
       var Observaciones = $('#ObservacionesField').val();
       var trid = $('#trid').val();
       var id = $('#id').val();
-      if (FechaDeVisita != '' && MotivoDeVisita != '' && MedicoTratante != ''&& ExamenesDeLab != '' && Diagnostico!= ''&& MedicamentoAp != '' && Observaciones != '') {
+      if (FechaDeVisita != '' && NombredePaciente!= '' && MotivoDeVisita != '' && MedicoTratante != '' && ExamenesDeLab != '' && Diagnostico!= ''&& MedicamentoAp != '' && Observaciones != '') {
         $.ajax({
           url: "update_user.php",
           type: "post",
           data: {
             FechaDeVisita: FechaDeVisita,
+            NombredePaciente: NombredePaciente,
             MotivoDeVisita: MotivoDeVisita,
             MedicoTratante: MedicoTratante,
             ExamenesDeLab: ExamenesDeLab,
@@ -528,7 +532,7 @@
               // table.cell(parseInt(trid) - 1,4).data(city);
               var button = '<td><a href="javascript:void();" data-id="' + id + '" class="btn btn-info btn-sm editbtn">Editar</a>  <a href="#!"  data-id="' + id + '"  class="btn btn-danger btn-sm deleteBtn">Borrar</a></td>';
               var row = table.row("[id='" + trid + "']");
-              row.row("[id='" + trid + "']").data([id, FechaDeVisita, MotivoDeVisita, MedicoTratante, ExamenesDeLab, Diagnostico, MedicamentoAp, Observaciones, button]);
+              row.row("[id='" + trid + "']").data([id, FechaDeVisita, Nombredepaciente, MotivoDeVisita, MedicoTratante, ExamenesDeLab, Diagnostico, MedicamentoAp, Observaciones, button]);
               $('#exampleModal').modal('hide');
             } else {
               alert('failed');
@@ -536,7 +540,7 @@
           }
         });
       } else {
-        alert('Fill all the required fields');
+        alert('Llenar campos requeridos');
       }
     });
     $('#example').on('click', '.editbtn ', function(event) {
@@ -555,10 +559,11 @@
         success: function(data) {
           var json = JSON.parse(data);
           $('#FechaDeVisitaField').val(json.FechaDeVisita);
+          $('#NombredePacienteField').val(json.NombredePaciente);
           $('#MotivoDeVisitaField').val(json.MotivoDeVisita);
           $('#MedicoTratanteField').val(json.MedicoTratante);
           $('#ExamenesDeLabField').val(json.ExamenesDeLab);
-          $('#MedicamentoApField').val(json.MedicamentoAp);
+          $('#DiagnosticoField').val(json.Diagnostico);
           $('#MedicamentoApField').val(json.MedicamentoAp);
           $('#ObservacionesField').val(json.Observaciones);
           $('#id').val(id);
@@ -613,21 +618,51 @@
             <input type="hidden" name="id" id="id" value="">
             <input type="hidden" name="trid" id="trid" value="">
             <div class="mb-3 row">
-              <label for="nameField" class="col-md-3 form-label">Nombre</label>
+              <label for="FechaDeVisitaField" class="col-md-3 form-label">Fecha de Visita</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" id="nameField" name="name">
+                <input type="date" class="form-control" id="FechaDeVisitaField" name="name">
               </div>
             </div>
             <div class="mb-3 row">
-              <label for="especialidadField" class="col-md-3 form-label">Especialidad</label>
+              <label for="NombredePacienteField" class="col-md-3 form-label">Nombre de Paciente</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" id="especialidadField" name="email">
+                <input type="text" class="form-control" id="NombredePacienteField" name="email">
               </div>
             </div>
             <div class="mb-3 row">
-              <label for="mobileField" class="col-md-3 form-label">Telefono</label>
+              <label for="MotivoDeVisitaField" class="col-md-3 form-label">Motivo de Visita</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" id="mobileField" name="mobile">
+                <input type="text" class="form-control" id="MotivoDeVisitaField" name="email">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="MedicoTratanteField" class="col-md-3 form-label">Medico Tratante</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="MedicoTratanteField" name="mobile">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="ExamenesDeLabField" class="col-md-3 form-label">Examenes Realizados</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="ExamenesDeLabField" name="name">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="DiagnosticoField" class="col-md-3 form-label">Diagnostico</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="DiagnosticoField" name="mobile">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="MedicamentoApField" class="col-md-3 form-label">Medicamento Aplicado</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="MedicamentoApField" name="mobile">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="ObservacionesField" class="col-md-3 form-label">Observaciones</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="ObservacionesField" name="mobile">
               </div>
             </div>
             <div class="text-center">
@@ -652,21 +687,51 @@
         <div class="modal-body">
           <form id="addUser" action="">
             <div class="mb-3 row">
-              <label for="addUserField" class="col-md-3 form-label">Nombre</label>
+              <label for="addFechaDeVisita" class="col-md-3 form-label">Fecha de Visita</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" id="addUserField" name="name">
+                <input type="date" class="form-control" id="addFechaDeVisita" name="name">
               </div>
             </div>
             <div class="mb-3 row">
-              <label for="addEspecalidadField" class="col-md-3 form-label">Especialidad</label>
+              <label for="addNombredePaciente" class="col-md-3 form-label">Nombre de Paciente</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" id="addEspecalidadField" name="email">
+                <input type="text" class="form-control" id="addNombredePaciente" name="email">
               </div>
             </div>
             <div class="mb-3 row">
-              <label for="addMobileField" class="col-md-3 form-label">Telefono</label>
+              <label for="addMotivoDeVisita" class="col-md-3 form-label">Motivo De Visita</label>
               <div class="col-md-9">
-                <input type="text" class="form-control" id="addMobileField" name="mobile">
+                <input type="text" class="form-control" id="addMotivoDeVisita" name="email">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="addMedicoTratante" class="col-md-3 form-label">Medico Tratante</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="addMedicoTratante" name="mobile">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="addExamenesDeLab" class="col-md-3 form-label">Examenes Realizados</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="addExamenesDeLab" name="name">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="addDiagnostico" class="col-md-3 form-label">Diagnostico</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="addDiagnostico" name="email">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="addMedicamentoAp" class="col-md-3 form-label">Medicamento Aplicado</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="addMedicamentoAp" name="mobile">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="addObservaciones" class="col-md-3 form-label">Observaciones</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="addObservaciones" name="mobile">
               </div>
             </div>
             <div class="text-center">

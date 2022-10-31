@@ -1,6 +1,7 @@
 <?php 
 include('connection.php');
 $FechaDeVisita = $_POST['FechaDeVisita'];
+$NombredePaciente = $_POST['NombredePaciente'];
 $MotivoDeVisita = $_POST['MotivoDeVisita'];
 $MedicoTratante = $_POST['MedicoTratante'];
 $ExamenesDeLab = $_POST['ExamenesDeLab'];
@@ -9,7 +10,7 @@ $MedicamentoAp = $_POST['MedicamentoAp'];
 $Observaciones = $_POST['Observaciones'];
 $id = $_POST['id'];
 
-$sql = "UPDATE `visitas` SET  `FechaDeVisita`='$FechaDeVisita' , `MotivoDeVisita`= '$MotivoDeVisita', `MedicoTratante`='$MedicoTratante', `Diagnostico `='$Diagnostico', `MedicamentoAp `='$MedicamentoAp', `Observaciones `='$Observaciones' WHERE id='$id' ";
+$sql = "UPDATE `visitas` SET  `FechaDeVisita`='$FechaDeVisita' , `NombredePaciente`= '$NombredePaciente', `MotivoDeVisita`= '$MotivoDeVisita', `MedicoTratante`='$MedicoTratante', `Diagnostico `='$Diagnostico', `MedicamentoAp `='$MedicamentoAp', `Observaciones `='$Observaciones' WHERE id='$id' ";
 $query= mysqli_query($con,$sql);
 $lastId = mysqli_insert_id($con);
 if($query ==true)

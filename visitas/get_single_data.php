@@ -1,4 +1,4 @@
-<?php include('visitas/connection.php');
+<?php include('connection.php');
 $id = $_POST['id'];
 $sql = "SELECT * FROM visitas WHERE id='$id' LIMIT 1";
 $query = mysqli_query($con,$sql);

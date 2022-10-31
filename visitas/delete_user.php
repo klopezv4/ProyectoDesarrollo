@@ -1,8 +1,8 @@
 <?php 
-include('visitas/connection.php');
+include('connection.php');
 
-$medico_id = $_POST['id'];
-$sql = "DELETE FROM visitas WHERE id='$medico_id'";
+$visitas_id = $_POST['id'];
+$sql = "DELETE FROM visitas WHERE id='$visitas_id'";
 $delQuery =mysqli_query($con,$sql);
 if($delQuery==true)
 {

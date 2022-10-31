@@ -1,7 +1,7 @@
 <?php include('connection.php');
 
 $output= array();
-$sql = "SELECT * FROM visitas";
+$sql = "SELECT * FROM visitas ";
 
 $totalQuery = mysqli_query($con,$sql);
 $total_all_rows = mysqli_num_rows($totalQuery);
@@ -9,18 +9,20 @@ $total_all_rows = mysqli_num_rows($totalQuery);
 $columns = array(
 	0 => 'id',
 	1 => 'FechaDeVisita',
-	2 => 'MotivoDeVisita',
-	3 => 'MedicoTratante',
-	4 => 'ExamenesDeLab',
-	5 => 'Diagnostico',
-	6 => 'MedicamentoAp',
-	7 => 'Observaciones',
+	2 => 'NombredePaciente',
+	3 => 'MotivoDeVisita',
+	4 => 'MedicoTratante',
+	5 => 'ExamenesDeLab',
+	6 => 'Diagnostico',
+	7 => 'MedicamentoAp',
+	8 => 'Observaciones',
 );
 
 if(isset($_POST['search']['value']))
 {
 	$search_value = $_POST['search']['value'];
 	$sql .= " WHERE FechaDeVisita like '%".$search_value."%'";
+	$sql .= " OR NombredePaciente like '%".$search_value."%'";
 	$sql .= " OR MotivoDeVisita like '%".$search_value."%'";
 	$sql .= " OR MedicoTratante like '%".$search_value."%'";
 	$sql .= " OR ExamenesDeLab like '%".$search_value."%'";
@@ -55,6 +57,7 @@ while($row = mysqli_fetch_assoc($query))
 	$sub_array = array();
 	$sub_array[] = $row['id'];
 	$sub_array[] = $row['FechaDeVisita'];
+	$sub_array[] = $row['NombredePaciente'];
 	$sub_array[] = $row['MotivoDeVisita'];
 	$sub_array[] = $row['MedicoTratante'];
 	$sub_array[] = $row['ExamenesDeLab'];
@@ -68,7 +71,7 @@ while($row = mysqli_fetch_assoc($query))
 $output = array(
 	'draw'=> intval($_POST['draw']),
 	'recordsTotal' =>$count_rows ,
-	'recordsFiltered'=>   $total_all_rows,
+	'recordsFiltered'=>  $total_all_rows,
 	'data'=>$data,
 );
 echo  json_encode($output);

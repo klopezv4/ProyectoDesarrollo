@@ -594,15 +594,15 @@
               </div>
             </div>
             <div class="mb-3 row">
-              <label for="especialidadField" class="col-md-3 form-label">Especialidad</label>
-              <div class="col-md-9">
-                <input type="text" class="form-control" id="especialidadField" name="email">
-              </div>
-            </div>
-            <div class="mb-3 row">
               <label for="mobileField" class="col-md-3 form-label">Telefono</label>
               <div class="col-md-9">
                 <input type="text" class="form-control" id="mobileField" name="mobile">
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="especialidadField" class="col-md-3 form-label">Especialidad</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" id="especialidadField" name="email">
               </div>
             </div>
             <div class="text-center">
