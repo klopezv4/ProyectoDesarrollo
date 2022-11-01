@@ -22,23 +22,35 @@
   <link href="medicos/css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
   <link rel="stylesheet" type="medicos/text/css" href="medicos/css/datatables-1.10.25.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="#" />
   <meta name="description" content="">
   <meta name="author" content="">
 
   <title>Cabeza de Algodon</title>
 
-  <style type="medicos/text/css">
+  <style type="text/css">
     .btnAdd {
       text-align: right;
       width: 83%;
       margin-bottom: 20px;
     }
   </style>
+
+    <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="main.css">
+
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css" />
+    <!--datables estilo bootstrap 4 CSS-->
+    <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
+
+    <!--font awesome con CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="../text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="../text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 </head>
@@ -167,10 +179,46 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.php">
+                <a class="nav-link" href="../datatables_custom/index.php">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Reporte Diario</span></a>
+                    <span>Reporte de Visitas</span></a>
             </li>
+            <hr class="sidebar-divider">
+
+              <!-- Heading -->
+              <div class="sidebar-heading">
+                Medicos
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Medicos</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="../medicos/medicos.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Medicos</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../visitas/visitas.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Visitas</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Farmacia</span>
+                </a>
+            </li>
+
+            <hr class="sidebar-divider">
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -179,7 +227,6 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
         </ul>
         <!-- End of Sidebar -->
 
@@ -347,15 +394,12 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $nombre;?></span>
-                                <img class="img-profile rounded-circle"
-                                    src="./img/undraw_profile.svg">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $nombre; ?></span>
+                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Perfil
@@ -365,12 +409,13 @@
                                     Configuración
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="./logout.php" >
+                                <a class="dropdown-item" href="logout.php">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Salir
                                 </a>
                             </div>
                         </li>
+
 
                     </ul>
 

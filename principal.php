@@ -162,7 +162,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="datatables_custom/index.php">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Reporte Diario</span></a>
+                    <span>Reporte de Visitas</span></a>
             </li>
             
             <hr class="sidebar-divider">
@@ -187,19 +187,9 @@
                     <span>Medicos</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="medicos/medicos.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Consultas</span></a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="visitas/visitas.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Visitas</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="medicos/medicos.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Laboratorio</span></a>
             </li>
 
             <li class="nav-item">
@@ -208,12 +198,6 @@
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Farmacia</span>
                 </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="medicos/medicos.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Medicamentos</span></a>
             </li>
 
             <hr class="sidebar-divider">

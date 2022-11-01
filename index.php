@@ -114,12 +114,6 @@
                                         </button>
                                     </form>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Olvido su Contraseña?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="register.html">Crear Cuenta</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
